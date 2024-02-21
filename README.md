@@ -94,7 +94,44 @@
 ### [민웅](./올바른%20쌍의%20괄호/민웅.py)
 
 ```py
+import sys
+input = sys.stdin.readline
 
+brackets = list(input().strip())
+
+l = len(brackets)
+stack = []
+
+idx = 0
+ans = ''
+while True:
+    if idx == l:
+        break
+    tmp = brackets[idx]
+    if stack:
+        if tmp == ")":
+            if stack[-1] == "(":
+                stack.pop()
+            else:
+                ans = "No"
+                break
+        else:
+            stack.append(tmp)
+    else:
+        if tmp == ')':
+            ans = "No"
+            break
+        stack.append(tmp)
+    
+    idx += 1
+
+if ans != 'No':
+    if stack:
+        print("No")
+    else:
+        print("Yes")
+else:
+    print(ans)
 ```
 
 ### [병국](./올바른%20쌍의%20괄호/병국.py)
@@ -129,7 +166,41 @@
 ### [민웅](./멀리멀리/민웅.py)
 
 ```py
+import sys
+input = sys.stdin.readline
 
+def dot_check(distance, dot_cordi, n, m):
+    cnt = 1
+    before = dot_cordi[0]
+
+    for i in range(1, n):
+        if dot_cordi[i] - before >= distance:
+            cnt += 1
+            before = dot_cordi[i]
+    
+    if cnt >= m:
+        return True
+    else:
+        return False
+
+N, M = map(int, input().split())
+dots = list(map(int, input().split()))
+
+dots.sort()
+
+i, j = 1, dots[-1]-dots[0]
+
+ans = 0
+while i <= j:
+    mid = (i+j)//2
+
+    if dot_check(mid, dots, N, M):
+        ans = mid
+        i = mid + 1
+    else:
+        j = mid - 1
+
+print(ans)
 ```
 
 ### [병국](./멀리멀리/병국.py)
