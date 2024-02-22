@@ -92,7 +92,16 @@ print(''.join(ans_lst))
 ### [상미](./최대%20숫자%20생성/상미.py)
 
 ```py
+def solution(numbers):
+    answer = ''
+    numbers.sort(key = lambda x : x*10, reverse=True)
+    answer = ''.join(numbers)
 
+    return answer
+
+n = int(input())
+arr = [input() for _ in range(n)]
+print(solution(arr))
 
 ```
 
@@ -142,7 +151,7 @@ while True:
             ans = "No"
             break
         stack.append(tmp)
-    
+
     idx += 1
 
 if ans != 'No':
@@ -164,7 +173,24 @@ else:
 ### [상미](./올바른%20쌍의%20괄호/상미.py)
 
 ```py
+import sys
+input = sys.stdin.readline
 
+bracket = input().strip()
+cnt = 0
+ans = 'Yes'
+for b in bracket:
+    if b == '(':
+        cnt += 1
+    else:
+        cnt -= 1
+    if cnt < 0:
+        ans = 'No'
+        break
+else:
+    if cnt != 0:
+        ans = 'No'
+print(ans)
 
 ```
 
@@ -197,7 +223,7 @@ def dot_check(distance, dot_cordi, n, m):
         if dot_cordi[i] - before >= distance:
             cnt += 1
             before = dot_cordi[i]
-    
+
     if cnt >= m:
         return True
     else:
